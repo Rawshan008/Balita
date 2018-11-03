@@ -15,19 +15,19 @@
         <div class="container">
           <div class="row">
             <div class="col-9 social">
-              <a href="#"><span class="fa fa-twitter"></span></a>
-              <a href="#"><span class="fa fa-facebook"></span></a>
-              <a href="#"><span class="fa fa-instagram"></span></a>
-              <a href="#"><span class="fa fa-youtube-play"></span></a>
-              <a href="#"><span class="fa fa-vimeo"></span></a>
-              <a href="#"><span class="fa fa-snapchat"></span></a>
+              <?php 
+                if(is_active_sidebar('header-left')){
+                  dynamic_sidebar('header-left');
+                }
+              ?>
             </div>
             <div class="col-3 search-top">
               <!-- <a href="#"><span class="fa fa-search"></span></a> -->
-              <form action="#" class="search-top-form">
-                <span class="icon fa fa-search"></span>
-                <input type="text" id="s" placeholder="Type keyword to search...">
-              </form>
+              <?php 
+                if(is_active_sidebar('header-right')){
+                  dynamic_sidebar('header-right');
+                }
+              ?>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="row pt-5">
           <div class="col-12 text-center">
             <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-            <h1 class="site-logo"><a href="index.html">Balita</a></h1>
+            <h1 class="site-logo"><a href="<?php echo site_url('/')?>"><?php bloginfo('name'); ?></a></h1>
           </div>
         </div>
       </div>
@@ -45,45 +45,20 @@
       <nav class="navbar navbar-expand-md  navbar-light bg-light">
         <div class="container">
           
-         
-          <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Travel</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="category.html">Asia</a>
-                  <a class="dropdown-item" href="category.html">Europe</a>
-                  <a class="dropdown-item" href="category.html">Dubai</a>
-                  <a class="dropdown-item" href="category.html">Africa</a>
-                  <a class="dropdown-item" href="category.html">South America</a>
-                </div>
-
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown05">
-                  <a class="dropdown-item" href="category.html">Lifestyle</a>
-                  <a class="dropdown-item" href="category.html">Food</a>
-                  <a class="dropdown-item" href="category.html">Adventure</a>
-                  <a class="dropdown-item" href="category.html">Travel</a>
-                  <a class="dropdown-item" href="category.html">Business</a>
-                </div>
-
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-            </ul>
-            
-          </div>
+          <?php 
+            wp_nav_menu(array(
+              'theme_location' => 'top-menu',
+              'menu_class' => 'navbar-nav mx-auto',
+              'container_class' => 'collapse navbar-collapse',
+              'container_id' => 'navbarMenu',
+              'link_class' => 'nav-link',
+              'depth' =>2,
+              'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback',
+              'walker' => new WP_Bootstrap_Navwalker(),
+            ));
+          ?>
         </div
+        
       </nav>
     </header>
     <!-- END header -->
